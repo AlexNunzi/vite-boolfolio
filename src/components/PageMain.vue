@@ -2,9 +2,7 @@
     <main>
         <div class="container">
             <div class="row">
-                <div class="text-center border border-black p-5">
-                    Contenuto
-                </div>
+
             </div>
         </div>
     </main>
@@ -14,7 +12,24 @@
     import axios from 'axios';
 
     export default {
-        name: 'PageMain'
+        name: 'PageMain',
+        data() {
+            return {
+                projects: [],
+                baseUrl: 'http://localhost:8000'
+            }
+        },
+        methods: {
+            getProjects() {
+                axios.get(`${this.baseUrl}/api/projects`)
+                .then(response => {
+                    console.log(response.data);
+                });
+            },
+        },
+        mounted() {
+            this.getProjects();
+        }
     }
 </script>
 
