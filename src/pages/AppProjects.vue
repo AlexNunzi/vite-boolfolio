@@ -4,13 +4,14 @@
             <div v-if="projects.length > 1" class="row">
                 <div v-for="project in projects" class="col-4 p-3">
                     <ProjectCard 
-                    :baseUrl="this.baseUrl"
+                    :baseUrl="this.storage.baseUrl"
                     :projectImg="project.preview_img"
-                    :placeholderImg="`${this.baseUrl}/img/h9pqRmsIwC1KOxfYbxgyvAFotT7SuEuNHayFtPir.png`"
+                    :placeholderImg="`${this.storage.baseUrl}/img/h9pqRmsIwC1KOxfYbxgyvAFotT7SuEuNHayFtPir.png`"
                     :projectTitle="project.title"
                     :startDate="project.start_date"
                     :endDate="project.end_date"
                     :description="truncateText(project.description)"
+                    :slug="project.slug"
                     />
                 </div>
             </div>
@@ -22,7 +23,7 @@
 <script>
 
     import ProjectCard from '../components/ProjectCard.vue';
-
+    import { storage } from '../storage.js';
     import axios from 'axios';
 
     export default {
@@ -33,13 +34,13 @@
         data() {
             return {
                 projects: [],
-                baseUrl: 'http://localhost:8000',
+                storage: storage,
                 contentMaxLength: 150
             }
         },
         methods: {
             getProjects() {
-                axios.get(`${this.baseUrl}/api/projects`)
+                axios.get(`${this.storage.baseUrl}/api/projects`)
                 .then(response => {
                     this.projects = response.data.results;
                     console.log(response.data.results);

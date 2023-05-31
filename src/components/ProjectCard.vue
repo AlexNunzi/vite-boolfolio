@@ -7,6 +7,9 @@
                 <h6>Data di inizio progetto: {{ startDate }}</h6>
                 <h6>Data di fine progetto: {{ endDate }}</h6>
                 <p>{{ description }}</p>
+                <router-link :to="{name: 'project-info', params: {slug: slug}}" class="btn btn-primary">
+                    Mostra progetto
+                </router-link>
             </div>
         </div>
 </template>
@@ -22,7 +25,8 @@
         placeholderImg: String,
         startDate: String,
         endDate: String,
-        description: String
+        description: String,
+        slug: String
 
     }
  }

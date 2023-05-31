@@ -15,6 +15,7 @@ export const storage = reactive(
                 label: 'Projects',
                 routeName: 'projects'
             }
-        ]
+        ],
+        baseUrl: 'http://localhost:8000',
     }
 );
