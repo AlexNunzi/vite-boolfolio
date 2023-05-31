@@ -2,18 +2,16 @@
   
   <PageHeader />
 
-  <PageMain />
+  <router-view></router-view>
 
 </template>
 
 <script>
 import PageHeader from './components/PageHeader.vue';
-import PageMain from './components/PageMain.vue';
 
 export default {
   components: {
-    PageHeader,
-    PageMain
+    PageHeader
   }
 }
 </script>
