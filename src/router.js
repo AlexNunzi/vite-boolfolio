@@ -4,6 +4,7 @@ import AppHome from './pages/AppHome.vue';
 import AppAboutUs from './pages/AppAboutUs.vue';
 import AppProjects from './pages/AppProjects.vue';
 import ProjectInfo from './pages/ProjectInfo.vue';
+import NotFound from './pages/NotFound.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -28,6 +29,11 @@ const router = createRouter({
             name: 'project-info',
             component: ProjectInfo
         },
+        {
+            path: '/:pathMatch(.*)*',
+            name: 'not-found',
+            component: NotFound
+        }
     ]
 });
 export { router };

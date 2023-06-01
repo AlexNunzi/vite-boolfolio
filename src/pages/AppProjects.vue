@@ -9,7 +9,7 @@
                     :placeholderImg="`${this.storage.baseUrl}/img/h9pqRmsIwC1KOxfYbxgyvAFotT7SuEuNHayFtPir.png`"
                     :projectTitle="project.title"
                     :startDate="project.start_date"
-                    :endDate="project.end_date"
+                    :endDate="project.end_date ? project.end_date : '-'"
                     :description="truncateText(project.description)"
                     :slug="project.slug"
                     />
