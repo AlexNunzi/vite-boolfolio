@@ -1,7 +1,7 @@
 <template>
     <main class="my-5">
         <div class="container">
-            <div v-if="projects.length > 1" class="row">
+            <div v-if="projects.length > 0" class="row">
                 <div v-for="project in projects" class="col-4 p-3">
                     <ProjectCard 
                     :baseUrl="this.storage.baseUrl"
@@ -14,6 +14,36 @@
                     :slug="project.slug"
                     />
                 </div>
+                <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <button 
+                            @click="getProjects(currentPage - 1)" 
+                            :class="{'disabled' : currentPage == 1, 'page-link': true}"
+                        >
+                            Previous
+                        </button>
+                    </li>
+
+                    <li class="page-item" v-for="page in lastPage" :class="{'active': page==currentPage}">
+                        <button 
+                            @click="getProjects(page)" 
+                            :class="{'page-link': true}"
+                        >
+                            {{ page }}
+                        </button>
+                    </li>
+
+                    <li class="page-item">
+                        <button 
+                            @click="getProjects(currentPage + 1)" 
+                            :class="{'disabled' : currentPage == lastPage, 'page-link': true}"
+                        >
+                            Next
+                        </button>
+                    </li>
+                </ul>
+            </nav>
             </div>
             <h4 v-else class="text-center">Non sono ancora presenti progetti da mostrare</h4>
         </div>
@@ -35,15 +65,25 @@
             return {
                 projects: [],
                 storage: storage,
-                contentMaxLength: 150
+                contentMaxLength: 150,
+                currentPage: 1,
+                lastPage: null,
             }
         },
         methods: {
-            getProjects() {
-                axios.get(`${this.storage.baseUrl}/api/projects`)
+            getProjects(pageNumber) {
+                axios.get(`${this.storage.baseUrl}/api/projects`,
+                    {
+                        params: {
+                            page: pageNumber
+                        }
+                    }
+                ) 
                 .then(response => {
-                    this.projects = response.data.results;
-                    console.log(response.data.results);
+                    console.log(response);
+                    this.projects = response.data.results.data;
+                    this.currentPage = response.data.results.current_page;
+                    this.lastPage = response.data.results.last_page;
                 });
             },
             truncateText(text) {
@@ -54,7 +94,7 @@
             }
         },
         mounted() {
-            this.getProjects();
+            this.getProjects(1);
         }
     }
 </script>
