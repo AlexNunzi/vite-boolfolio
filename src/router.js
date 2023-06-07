@@ -5,6 +5,7 @@ import AppAboutUs from './pages/AppAboutUs.vue';
 import AppProjects from './pages/AppProjects.vue';
 import ProjectInfo from './pages/ProjectInfo.vue';
 import NotFound from './pages/NotFound.vue';
+import AppContact from './pages/AppContact.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -23,6 +24,11 @@ const router = createRouter({
             path: '/Projects',
             name: 'projects',
             component: AppProjects
+        },
+        {
+            path: '/Contact-us',
+            name: 'contact-us',
+            component: AppContact
         },
         {
             path: '/Projects/:slug',

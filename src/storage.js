@@ -14,6 +14,10 @@ export const storage = reactive(
             {
                 label: 'Projects',
                 routeName: 'projects'
+            },
+            {
+                label: 'Contact-us',
+                routeName: 'contact-us'
             }
         ],
         baseUrl: 'http://localhost:8000',
